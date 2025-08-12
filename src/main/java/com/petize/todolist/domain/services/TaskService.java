@@ -1,10 +1,15 @@
 package com.petize.todolist.domain.services;
 
-import java.util.List;
+import java.time.LocalDate;
+import java.util.UUID;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.petize.todolist.domain.models.Task;
+import com.petize.todolist.domain.models.enums.Priority;
+import com.petize.todolist.domain.models.enums.TaskStatus;
 import com.petize.todolist.domain.repositories.TaskRepository;
 
 import jakarta.validation.Valid;
@@ -20,7 +25,20 @@ public class TaskService {
         return taskRepository.save(task);
     }
 
-    public List<Task> getAll() {
-        return taskRepository.findAll();
+    public Task getById(UUID id) {
+        return taskRepository.findById(id).orElseThrow();
+    }
+
+    public Page<Task> getAllWithFilters(LocalDate dueDate, TaskStatus status, Priority priority, Pageable pageable) {
+        return taskRepository.findAllWithFilters(dueDate, status, priority, pageable);
+    }
+
+    public void updateStatus(Task task, TaskStatus status) {
+        task.setStatus(status);
+        save(task);
+    }
+
+    public void delete(Task task) {
+        taskRepository.delete(task);
     }
 }
