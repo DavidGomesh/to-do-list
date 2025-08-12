@@ -31,6 +31,15 @@ public class Error {
         );
     }
 
+    public static Error conflict(String message) {
+        return (Error.builder()
+            .code(HttpStatus.CONFLICT.value())
+            .status(HttpStatus.CONFLICT.name())
+            .message(message)
+            .build()
+        );
+    }
+
     public static Error internalServerError(String message) {
         return (Error.builder()
             .code(HttpStatus.INTERNAL_SERVER_ERROR.value())

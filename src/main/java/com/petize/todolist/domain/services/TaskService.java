@@ -1,5 +1,7 @@
 package com.petize.todolist.domain.services;
 
+import static com.petize.todolist.domain.models.enums.TaskStatus.COMPLETED;
+
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -12,6 +14,7 @@ import com.petize.todolist.domain.models.enums.Priority;
 import com.petize.todolist.domain.models.enums.TaskStatus;
 import com.petize.todolist.domain.repositories.TaskRepository;
 import com.petize.todolist.exceptions.EntityNotFoundException;
+import com.petize.todolist.exceptions.NotCompletedSubtaskException;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -37,8 +40,19 @@ public class TaskService {
     }
 
     public void updateStatus(Task task, TaskStatus status) {
+        
+        if (status == COMPLETED && containsNotCompletedSubtasks(task)) {
+            throw new NotCompletedSubtaskException(task.getId());
+        }
+
         task.setStatus(status);
         save(task);
+    }
+
+    private boolean containsNotCompletedSubtasks(Task task) {
+        return (task.getSubTasks().stream().anyMatch(
+            subTask -> subTask.getStatus() != COMPLETED || containsNotCompletedSubtasks(subTask)
+        ));
     }
 
     public void delete(Task task) {

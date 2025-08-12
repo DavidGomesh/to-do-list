@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.petize.todolist.exceptions.EntityNotFoundException;
+import com.petize.todolist.exceptions.NotCompletedSubtaskException;
 import com.petize.todolist.handlers.errors.Error;
 import com.petize.todolist.handlers.errors.ValidationError;
 import com.petize.todolist.handlers.errors.ValidationError.InvalidField;
@@ -37,6 +38,13 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(EntityNotFoundException.class)
     public Error handle(EntityNotFoundException ex) {
         return Error.notFound(ex.getMessage());
+    }
+
+    // (409) Conflict
+    @ResponseStatus(code = HttpStatus.CONFLICT)
+    @ExceptionHandler(NotCompletedSubtaskException.class)
+    public Error handle(NotCompletedSubtaskException ex) {
+        return Error.conflict(ex.getMessage());
     }
     
     // (500) Internal Server Error
