@@ -11,6 +11,7 @@ import com.petize.todolist.domain.models.Task;
 import com.petize.todolist.domain.models.enums.Priority;
 import com.petize.todolist.domain.models.enums.TaskStatus;
 import com.petize.todolist.domain.repositories.TaskRepository;
+import com.petize.todolist.exceptions.EntityNotFoundException;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -26,7 +27,9 @@ public class TaskService {
     }
 
     public Task getById(UUID id) {
-        return taskRepository.findById(id).orElseThrow();
+        return taskRepository.findById(id).orElseThrow(
+            () -> new EntityNotFoundException(Task.class, id)
+        );
     }
 
     public Page<Task> getAllWithFilters(LocalDate dueDate, TaskStatus status, Priority priority, Pageable pageable) {
