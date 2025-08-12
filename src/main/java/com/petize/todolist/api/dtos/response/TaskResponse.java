@@ -14,5 +14,5 @@ public record TaskResponse (
     LocalDate dueDate,
     TaskStatus status,
     Priority priority,
-    List<TaskResponse> subTasks 
+    List<UUID> subTasks 
 ) {}

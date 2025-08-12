@@ -1,6 +1,7 @@
 package com.petize.todolist.api.dtos.mappers;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -18,4 +19,8 @@ public interface TaskMapper {
 
     TaskResponse toResponse(Task entity);
     List<TaskResponse> toResponseList(List<Task> entities);
+
+    default UUID toId(Task entity) {
+        return entity.getId();
+    }
 }
