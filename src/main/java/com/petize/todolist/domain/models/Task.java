@@ -9,7 +9,10 @@ import java.util.UUID;
 import com.petize.todolist.domain.models.enums.Priority;
 import com.petize.todolist.domain.models.enums.TaskStatus;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -17,9 +20,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Future;
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,11 +34,11 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Max(100)
+    @Size(max = 100)
     @NotBlank
     private String title;
     
-    @Max(500)
+    @Size(max = 500)
     @NotBlank
     private String description;
 
@@ -44,15 +47,17 @@ public class Task {
     private LocalDate dueDate;
     
     @NotNull
+    @Enumerated(EnumType.STRING)
     private TaskStatus status = PENDING;
-
+    
     @NotNull
+    @Enumerated(EnumType.STRING)
     private Priority priority;
 
     @ManyToOne
     @JoinColumn(name = "parent_task_fk")
     private Task parentTask;
 
-    @OneToMany(mappedBy = "parentTask")
+    @OneToMany(mappedBy = "parentTask", cascade = CascadeType.PERSIST)
     private List<Task> subTasks;
 }

@@ -7,17 +7,17 @@ import com.petize.todolist.domain.models.enums.Priority;
 import com.petize.todolist.domain.models.enums.TaskStatus;
 
 import jakarta.validation.constraints.Future;
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 public record TaskRequest (
 
-    @Max(100)
+    @Size(max = 100)
     @NotBlank
     String title,
 
-    @Max(500)
+    @Size(max = 500)
     @NotBlank
     String description,
 

@@ -1,5 +1,7 @@
 package com.petize.todolist.api.dtos.mappers;
 
+import java.util.List;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -15,4 +17,5 @@ public interface TaskMapper {
     Task toEntity(TaskRequest dto);
 
     TaskResponse toResponse(Task entity);
+    List<TaskResponse> toResponseList(List<Task> entities);
 }
