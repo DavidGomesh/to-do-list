@@ -3,6 +3,7 @@ package com.petize.todolist.domain.models;
 import static com.petize.todolist.domain.models.enums.TaskStatus.PENDING;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 import com.petize.todolist.domain.models.enums.Priority;
@@ -12,6 +13,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
@@ -44,4 +48,11 @@ public class Task {
 
     @NotNull
     private Priority priority;
+
+    @ManyToOne
+    @JoinColumn(name = "parent_task_fk")
+    private Task parentTask;
+
+    @OneToMany(mappedBy = "parentTask")
+    private List<Task> subTasks;
 }
