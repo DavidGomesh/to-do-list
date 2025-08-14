@@ -59,6 +59,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(RuntimeException.class)
     public Error handle(RuntimeException ex) {
+        ex.printStackTrace();
         return Error.internalServerError(ex.getMessage());
     }
 }

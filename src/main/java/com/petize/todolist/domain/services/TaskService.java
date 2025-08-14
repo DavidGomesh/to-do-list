@@ -34,9 +34,11 @@ public class TaskService {
 
     public void associate(Task task, User user) {
         task.setUser(user);
-        task.getSubTasks().forEach(
-            subtask -> associate(subtask, user)
-        );
+        if(task.getSubTasks() != null) {
+            task.getSubTasks().forEach(
+                subtask -> associate(subtask, user)
+            );
+        }
     }
 
     public Task getById(Integer id) {

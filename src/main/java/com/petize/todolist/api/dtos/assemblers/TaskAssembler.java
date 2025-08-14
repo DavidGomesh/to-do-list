@@ -21,9 +21,11 @@ public class TaskAssembler {
     }
 
     private void setParentTask(Task task) {
-        task.getSubTasks().forEach(subTask -> {
-            subTask.setParentTask(task);
-            setParentTask(subTask);
-        });
+        if(task.getSubTasks() != null) {
+            task.getSubTasks().forEach(subTask -> {
+                subTask.setParentTask(task);
+                setParentTask(subTask);
+            });
+        }
     }
 }

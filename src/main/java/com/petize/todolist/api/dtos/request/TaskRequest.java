@@ -6,6 +6,7 @@ import java.util.List;
 import com.petize.todolist.domain.models.enums.Priority;
 import com.petize.todolist.domain.models.enums.TaskStatus;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -32,5 +33,6 @@ public record TaskRequest (
     Priority priority,
 
     @NotNull
+    @Schema(hidden = true)
     List<TaskRequest> subTasks
 ) {}

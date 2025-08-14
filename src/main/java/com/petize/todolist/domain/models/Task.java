@@ -3,6 +3,7 @@ package com.petize.todolist.domain.models;
 import static com.petize.todolist.domain.models.enums.TaskStatus.PENDING;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.petize.todolist.domain.models.enums.Priority;
@@ -63,5 +64,5 @@ public class Task {
     private Task parentTask;
 
     @OneToMany(mappedBy = "parentTask", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-    private List<Task> subTasks;
+    private List<Task> subTasks = new ArrayList<>();
 }
