@@ -1,4 +1,8 @@
 
+-- Users
+INSERT INTO users(id, username, password) VALUES
+('b0d8edfe-53d8-40dd-a323-8e9d8f42b3a2', 'david', '$2a$10$jJx/r1TV8kohq4JlYgWhbuuZPbDKmddUgKFMwnm6ziErIb6A9NJQ.');
+
 -- Main Tasks
 INSERT INTO task (id, title, description, due_date, status, priority, parent_task_fk) VALUES
 ('620db693-a211-4176-9380-769f51615fa0', 'Organizar documentos do escritório', 'Separar, categorizar e arquivar todos os documentos do escritório', '2025-08-22', 'PENDING', 'MEDIUM', NULL),
