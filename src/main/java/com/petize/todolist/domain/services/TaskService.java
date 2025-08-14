@@ -3,7 +3,6 @@ package com.petize.todolist.domain.services;
 import static com.petize.todolist.domain.models.enums.TaskStatus.COMPLETED;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

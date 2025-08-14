@@ -4,13 +4,11 @@ import static com.petize.todolist.domain.models.enums.TaskStatus.PENDING;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 import com.petize.todolist.domain.models.enums.Priority;
 import com.petize.todolist.domain.models.enums.TaskStatus;
 
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;

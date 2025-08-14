@@ -1,7 +1,6 @@
 package com.petize.todolist.domain.services;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

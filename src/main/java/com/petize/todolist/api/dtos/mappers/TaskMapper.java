@@ -1,7 +1,6 @@
 package com.petize.todolist.api.dtos.mappers;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
