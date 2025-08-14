@@ -49,17 +49,9 @@ public class TaskControllerImpl implements TaskController {
     @Override
     public ResponseEntity<Page<TaskResponse>> getAll(
         LocalDate dueDate, TaskStatus status, Priority priority, Pageable pageable) {
-
-        var user = authenticationService.getUserAuthenticated().getUser();
-        System.out.println("RESULTADOS");
-        System.out.println(user.getId());
-        System.out.println(user.getUsername());
-        System.out.println(user.getPassword());
-        System.out.println(taskService
-            .getAllWithFilters(user, dueDate, status, priority, pageable)
-            .map(taskMapper::toResponse));
+        
         return ResponseEntity.ok(taskService
-            .getAllWithFilters(user, dueDate, status, priority, pageable)
+            .getAllWithFilters(dueDate, status, priority, pageable)
             .map(taskMapper::toResponse)
         );
     }
@@ -73,7 +65,7 @@ public class TaskControllerImpl implements TaskController {
 
     @Override
     public ResponseEntity<Void> updateStatus(Integer id, TaskStatus status) {
-        taskService.updateStatus(taskService.getById(id), status);
+        taskService.updateStatus(id, status);
         return ResponseEntity.noContent().build();
     }
 

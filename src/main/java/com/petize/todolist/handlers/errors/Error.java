@@ -22,6 +22,15 @@ public class Error {
         return new ValidationError(invalidFields);
     }
 
+    public static Error unauthorized(String message) {
+        return (Error.builder()
+            .code(HttpStatus.UNAUTHORIZED.value())
+            .status(HttpStatus.UNAUTHORIZED.name())
+            .message(message)
+            .build()
+        );
+    }
+
     public static Error notFound(String message) {
         return (Error.builder()
             .code(HttpStatus.NOT_FOUND.value())

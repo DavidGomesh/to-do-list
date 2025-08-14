@@ -62,6 +62,6 @@ public class Task {
     @JoinColumn(name = "parent_task_fk")
     private Task parentTask;
 
-    @OneToMany(mappedBy = "parentTask", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "parentTask", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Task> subTasks;
 }

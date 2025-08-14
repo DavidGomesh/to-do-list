@@ -40,7 +40,7 @@ public interface TaskController {
 
 
 
-    @Operation(summary = "Retrieves all tasks", description = "Returns a paginated list of tasks, with optional filters.")
+    @Operation(summary = "Retrieves all tasks of the logged user", description = "Returns a paginated list of tasks, with optional filters.")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Successfully retrieved tasks")
     })

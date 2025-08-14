@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.petize.todolist.exceptions.AccessDeniedException;
 import com.petize.todolist.exceptions.EntityNotFoundException;
 import com.petize.todolist.exceptions.NotCompletedSubtaskException;
 import com.petize.todolist.handlers.errors.Error;
@@ -31,6 +32,13 @@ public class GlobalExceptionHandler {
         return new ValidationError.InvalidField(
             error.getField(), error.getDefaultMessage()
         );
+    }
+    
+    // (401) Unauthorized
+    @ResponseStatus(code = HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler(AccessDeniedException.class)
+    public Error handle(AccessDeniedException ex) {
+        return Error.unauthorized(ex.getMessage());
     }
 
     // (404) Not Found
