@@ -34,6 +34,11 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "user_fk")
+    private User user;
+
     @Size(max = 100)
     @NotBlank
     private String title;

@@ -9,6 +9,7 @@ import com.petize.todolist.domain.models.enums.TaskStatus;
 
 public record TaskResponse (
     UUID id,
+    UserResponse user,
     String title,
     String description,
     LocalDate dueDate,

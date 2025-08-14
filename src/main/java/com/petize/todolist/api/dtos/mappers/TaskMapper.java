@@ -10,13 +10,14 @@ import com.petize.todolist.api.dtos.request.TaskRequest;
 import com.petize.todolist.api.dtos.response.TaskResponse;
 import com.petize.todolist.domain.models.Task;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = UserMapper.class)
 public interface TaskMapper {
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "user", ignore = true)
     @Mapping(target = "parentTask", ignore = true)
     Task toEntity(TaskRequest dto);
-
+    
     TaskResponse toResponse(Task entity);
     List<TaskResponse> toResponseList(List<Task> entities);
 

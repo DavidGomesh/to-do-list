@@ -17,6 +17,7 @@ import com.petize.todolist.api.dtos.response.TaskResponse;
 import com.petize.todolist.domain.models.enums.Priority;
 import com.petize.todolist.domain.models.enums.TaskStatus;
 import com.petize.todolist.domain.services.TaskService;
+import com.petize.todolist.domain.services.auth.AuthenticationService;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -28,10 +29,14 @@ public class TaskControllerImpl implements TaskController {
     private final TaskAssembler taskAssembler;
     private final TaskMapper taskMapper;
     private final TaskService taskService;
+    private final AuthenticationService authenticationService;
 
     @Override
     public ResponseEntity<Void> save(@Valid TaskRequest dto) {
         var task = taskAssembler.toEntity(dto);
+        var user = authenticationService.getUserAuthenticated().getUser();
+
+        taskService.associate(task, user);
         taskService.save(task);
 
         return ResponseEntity.created(ServletUriComponentsBuilder
@@ -45,9 +50,10 @@ public class TaskControllerImpl implements TaskController {
     @Override
     public ResponseEntity<Page<TaskResponse>> getAll(
         LocalDate dueDate, TaskStatus status, Priority priority, Pageable pageable) {
-        
+
+        var user = authenticationService.getUserAuthenticated().getUser();
         return ResponseEntity.ok(taskService
-            .getAllWithFilters(dueDate, status, priority, pageable)
+            .getAllWithFilters(user, dueDate, status, priority, pageable)
             .map(taskMapper::toResponse)
         );
     }

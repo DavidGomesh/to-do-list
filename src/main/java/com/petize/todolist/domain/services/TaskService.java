@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.petize.todolist.domain.models.Task;
+import com.petize.todolist.domain.models.User;
 import com.petize.todolist.domain.models.enums.Priority;
 import com.petize.todolist.domain.models.enums.TaskStatus;
 import com.petize.todolist.domain.repositories.TaskRepository;
@@ -29,14 +30,21 @@ public class TaskService {
         return taskRepository.save(task);
     }
 
+    public void associate(Task task, User user) {
+        task.setUser(user);
+        task.getSubTasks().forEach(
+            subtask -> associate(subtask, user)
+        );
+    }
+
     public Task getById(UUID id) {
         return taskRepository.findById(id).orElseThrow(
             () -> new EntityNotFoundException(Task.class, id)
         );
     }
 
-    public Page<Task> getAllWithFilters(LocalDate dueDate, TaskStatus status, Priority priority, Pageable pageable) {
-        return taskRepository.findAllWithFilters(dueDate, status, priority, pageable);
+    public Page<Task> getAllWithFilters(User user, LocalDate dueDate, TaskStatus status, Priority priority, Pageable pageable) {
+        return taskRepository.findAllWithFilters(user, dueDate, status, priority, pageable);
     }
 
     public void updateStatus(Task task, TaskStatus status) {
