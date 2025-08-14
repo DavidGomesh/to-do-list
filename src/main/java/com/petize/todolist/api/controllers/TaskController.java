@@ -1,7 +1,6 @@
 package com.petize.todolist.api.controllers;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -37,13 +36,13 @@ public interface TaskController {
     );
 
     @GetMapping("{id}")
-    ResponseEntity<TaskResponse> getById(@PathVariable UUID id);
+    ResponseEntity<TaskResponse> getById(@PathVariable Integer id);
 
     @PatchMapping("{id}/status/{status}")
-    ResponseEntity<Void> updateStatus(@PathVariable UUID id, @PathVariable TaskStatus status);
+    ResponseEntity<Void> updateStatus(@PathVariable Integer id, @PathVariable TaskStatus status);
 
     @DeleteMapping("{id}")
-    ResponseEntity<Void> delete(@PathVariable UUID id);
+    ResponseEntity<Void> delete(@PathVariable Integer id);
 
 
 }

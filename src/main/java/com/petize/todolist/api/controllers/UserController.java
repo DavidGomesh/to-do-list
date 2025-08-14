@@ -25,6 +25,6 @@ public interface UserController {
     ResponseEntity<List<UserResponse>> getAll();
 
     @GetMapping("{id}")
-    ResponseEntity<UserResponse> getById(@PathVariable UUID id);
+    ResponseEntity<UserResponse> getById(@PathVariable Integer id);
         
 }

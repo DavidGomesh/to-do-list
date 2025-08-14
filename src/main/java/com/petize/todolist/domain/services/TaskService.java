@@ -37,7 +37,7 @@ public class TaskService {
         );
     }
 
-    public Task getById(UUID id) {
+    public Task getById(Integer id) {
         return taskRepository.findById(id).orElseThrow(
             () -> new EntityNotFoundException(Task.class, id)
         );

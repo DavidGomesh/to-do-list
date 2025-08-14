@@ -1,7 +1,6 @@
 package com.petize.todolist.api.controllers.impl;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,7 +44,7 @@ public class UserControllerImpl implements UserController {
     }
 
     @Override
-    public ResponseEntity<UserResponse> getById(@PathVariable UUID id) {
+    public ResponseEntity<UserResponse> getById(@PathVariable Integer id) {
         return ResponseEntity.ok(userMapper.toResponse(
             userService.getById(id)
         ));

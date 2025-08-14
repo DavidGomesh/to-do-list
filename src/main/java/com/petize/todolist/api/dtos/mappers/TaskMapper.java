@@ -21,7 +21,7 @@ public interface TaskMapper {
     TaskResponse toResponse(Task entity);
     List<TaskResponse> toResponseList(List<Task> entities);
 
-    default UUID toId(Task entity) {
+    default Integer toId(Task entity) {
         return entity.getId();
     }
 }

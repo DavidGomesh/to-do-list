@@ -1,7 +1,6 @@
 package com.petize.todolist.domain.repositories;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,7 +15,7 @@ import com.petize.todolist.domain.models.enums.Priority;
 import com.petize.todolist.domain.models.enums.TaskStatus;
 
 @Repository
-public interface TaskRepository extends JpaRepository<Task, UUID> {
+public interface TaskRepository extends JpaRepository<Task, Integer> {
 
     @Query("""
         SELECT t FROM Task t
